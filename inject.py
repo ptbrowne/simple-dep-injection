@@ -1,6 +1,7 @@
 import inspect
 from graph_tools import topsort
 from utils import result
+from functools import wraps
 
 
 def get_deps(fn, namespace):
@@ -20,15 +21,15 @@ def get_deps(fn, namespace):
 def execute_with_deps(fn, namespace):
     env = {}
     deps = get_deps(fn, namespace=namespace)
-    right_order = list(reversed(topsort(deps)))
     l = result(namespace)
-    for n in right_order:
+    for n in reversed(list(topsort(deps))):
         kwargs = {func_name: env[func_name] for func_name in deps[n]}
         env[n] = l[n](**kwargs)
     return env[fn.func_name]
 
 
 def injected(fn, namespace=lambda: globals()):
+    @wraps(fn)
     def wrapped():
         return execute_with_deps(fn, namespace)
     return wrapped

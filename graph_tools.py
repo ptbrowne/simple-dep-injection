@@ -1,4 +1,5 @@
 from collections import defaultdict
+from collections import deque
 
 
 def reverse_graph(g):
@@ -7,25 +8,22 @@ def reverse_graph(g):
         g2[k]
         for t in v:
             g2[t].add(k)
-    return {k: set(v) for k, v in g2.iteritems()}
+    return g2
 
 
 def iter_sinks(g):
-    for k, v in g.iteritems():
-        if not len(v):
-            yield k
-        for n in v:
-            if n not in g:
-                yield n
+    for node, edges in g.iteritems():
+        if not edges:
+            yield node
 
 
 def sinks(g):
     return list(iter_sinks(g))
 
 
-def iter_topsort(g):
+def topsort(g):
     rg = reverse_graph(g)
-    q = sinks(rg)  # g's sources
+    q = deque(sinks(rg))  # g's sources
     already = set()
 
     # invariant, at any point in the algorithm
@@ -40,9 +38,5 @@ def iter_topsort(g):
 
             # insert in queue if the node is now a source
             if len(rg[child]) == 0 and child not in already:
-                q.insert(0, child)
+                q.appendleft(child)
         yield n
-
-
-def topsort(g):
-    return list(iter_topsort(g))
