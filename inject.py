@@ -1,6 +1,5 @@
 """
-Proof of concept of doing dependency injection using
-functions.
+Proof of concept of doing dependency injection using functions.
 
 It is not meant to be used anywhere, this work's sole
 purpose was to better understand the concept and how
@@ -13,6 +12,7 @@ from graph_tools import topsort
 from utils import result
 from functools import wraps
 
+__all__ = ['call', 'injected']
 
 def get_deps(fn, namespace):
     deps = {}
