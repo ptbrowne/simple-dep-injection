@@ -20,9 +20,9 @@ and argument names to specify dependencies.
 
 ### call
 
-Execute a function with dependency injection. The namespace
+Execute a function with dependency injection.
 
-is the container of all the dependencies
+The namespace is the container of all the dependencies.
 
 ```python
 >>> def a(b): return b*2
@@ -37,9 +37,8 @@ is the container of all the dependencies
 
 ### injected
 
-Make a closure with dependency already solved so that you can
+Returns a function that can be called without using call.
 
-call the function normally without using call
 
 ```python
 >>> def a(b): return b*2

@@ -34,8 +34,8 @@ def get_deps(fn, namespace):
 
 def call(fn, namespace):
     """
-    Execute a function with dependency injection. The namespace
-    is the container of all the dependencies
+    Execute a function with dependency injection.
+    The namespace is the container of all the dependencies.
 
     >>> def a(b): return b*2
     >>> def b(): return 1
@@ -56,8 +56,7 @@ def call(fn, namespace):
 
 def injected(fn, namespace=lambda: globals()):
     """
-    Make a closure with dependency already solved so that you can
-    call the function normally without using call
+    Returns a function that can be called without using call.
 
     >>> def a(b): return b*2
     >>> def b(): return 1
