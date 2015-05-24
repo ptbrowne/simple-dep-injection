@@ -1,5 +1,5 @@
 import unittest
-from inject import get_deps, execute_with_deps, injected
+from inject import get_deps, call, injected
 
 def a(b,c,d): return ''.join(['A', b, c, d])
 def b(c, d): return ''.join(['B', c, d])
@@ -20,7 +20,7 @@ class DepInjectTest(unittest.TestCase):
         self.assertEqual(set(), set(deps['d']))
 
     def test_execute_with_deps(self):
-        res = execute_with_deps(self.ns['a'], namespace=self.ns)
+        res = call(self.ns['a'], namespace=self.ns)
         self.assertEqual(res, 'ABCDDCDD')
 
     def test_injected(self):
