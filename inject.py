@@ -6,18 +6,6 @@ It is not meant to be used anywhere, this work's sole
 purpose was to better understand the concept and how
 to implement it. To keep it simple, I used functions
 and argument names to specify dependencies.
-
-def a(b): return b*2
-def b(): return 1
-def c(): return 4
-
-call(a, {'b': b})
-call(a, {'b': c}) # mocking !
-
-injected_a = injected(a, {'b': b})
-
-# here you can call injected_a "normally"
-injected_a()
 """
 
 import inspect
