@@ -6,10 +6,28 @@ Proof of concept of doing dependency injection using functions.
     - [call](#call)
     - [injected](#injected)
 
-It is not meant to be used anywhere, this work's sole
-purpose was to better understand the concept and how
-to implement it. To keep it simple, I used functions
-and argument names to specify dependencies.
+Dependency injection
+====================
+
+Dependency injection is a form of Inversion of Control where
+the user a service does not instantiate/call the service but where
+the service is instantiated/called by the dependency injection
+framework.
+
+Here, services are approximated as functions. If a functions depends
+on the result of another function to properly execute, it specifies the
+function to be called in its arguments. To execute a function, the
+dependency injection framework, here `call`, will gather the dependencies
+of the functions, gather the dependencies of the dependencies, all the way
+down and will find the right execution order with a `topsort`. It will then
+call each dependency in order, passing the results to the functions that
+need it.
+
+DI's primary goal is decoupling and minimal knowledge of the dependencies.
+Indeed, the user of a service does not need to know how to instantiate this
+service as it is the dependency framework that will sort out how to instantiate
+it (along with its dependencies). It also allows for easier testing as the
+dependencies of a module under test can be mocked.
 
 
 ## API
