@@ -28,5 +28,11 @@ class DepInjectTest(unittest.TestCase):
         res = inj()
         self.assertEqual(res, 'ABCDDCDD')
 
+    def test_mocking(self):
+        def mock_d():
+            return 'MOCKD'
+        res = call(self.ns['c'], namespace=dict(self.ns, **{'d': mock_d}))
+        self.assertEqual(res, 'CMOCKD')
+
 if __name__ == '__main__':
     unittest.main()
